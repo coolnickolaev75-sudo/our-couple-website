@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Москва | Наши путешествия</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> На главную
+        </a>
+        
+        <div class="city-detail">
+            <h1 class="city-title">Москва</h1>
+            <div class="city-date">
+                <i class="fas fa-calendar-alt"></i>
+                Посещено: 05.02.2026
+            </div>
+            
+            <div class="city-photos">
+                <img src="https://ibb.co/23s3J9Hq" alt="Москва" class="city-main-photo">
+            </div>
+            
+            <div class="city-description">
+                <h3><i class="fas fa-info-circle"></i> О поездке</h3>
+                <p>Поездка на Красную площадь с зонтом. Незабываемое путешествие в столицу России.</p>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .city-title {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .city-date {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        .city-main-photo {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+        }
+    </style>
+</body>
+</html>
