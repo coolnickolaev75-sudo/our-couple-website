@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наша История | Лина & [Твое Имя]</title>
+    
+    <!-- Подключение стилей и шрифтов -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+    
+    <style>
+        /* Быстрые стили для немедленного отображения, пока грузится style.css */
+        .loading-screen {
+            text-align: center;
+            padding: 50px 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff3366;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Экран загрузки -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <h2 style="color: #ff3366;">Загружаем нашу историю...</h2>
+        <p>Подключаемся к Google Таблицам</p>
+    </div>
+    
+    <!-- Анимированный фон (снег/дождь/сердца) -->
+    <div id="weather-background"></div>
+    
+    <!-- Основной контент (скрыт до загрузки) -->
+    <div id="main-content" style="display: none;">
+        <div class="container">
+            <!-- Шапка -->
+            <header class="header">
+                <h1 class="couple-names" id="dynamicTitle">
+                    <span class="name-1">Лина</span> 
+                    <span class="heart-divider">❤️</span> 
+                    <span class="name-2">[Твое Имя]</span>
+                </h1>
+                <p class="subtitle" id="dynamicSubtitle">
+                    Наша история в фотографиях и путешествиях
+                </p>
+            </header>
+
+            <!-- Счётчик отношений -->
+            <section class="love-counter">
+                <h2><i class="fas fa-heartbeat"></i> Наш счётчик</h2>
+                <div class="counter-display">
+                    <div class="main-counter">
+                        <span id="daysCounter">361</span>
+                        <span class="counter-label">дней вместе</span>
+                    </div>
+                    <div class="counter-details">
+                        <div class="counter-item">
+                            <span class="value" id="monthsCounter">11</span>
+                            <span class="label">месяцев</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="value" id="weeksCounter">51</span>
+                            <span class="label">недель</span>
+                        </div>
+                        <div class="counter-item">
+                            <span class="value" id="hoursCounter">8664</span>
+                            <span class="label">часов</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="counter-note">С 18 февраля 2025 года <i class="fas fa-heart"></i></p>
+            </section>
+
+            <!-- Погода в Перми -->
+            <section class="weather-widget">
+                <div class="weather-header">
+                    <h3><i class="fas fa-map-marker-alt"></i> Погода в Перми</h3>
+                    <button id="refreshWeather" class="refresh-btn" title="Обновить">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="weather-content">
+                    <div class="weather-main">
+                        <div class="weather-icon" id="weatherIcon">❄️</div>
+                        <div class="weather-temp">
+                            <span class="temp-value" id="temperature">-21°</span>
+                            <span class="temp-unit">C</span>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <p class="weather-desc" id="weatherDescription">Облачно, слабый снег</p>
+                        <div class="weather-stats">
+                            <div class="stat"><i class="fas fa-temperature-low"></i> Ощущается: <span id="feelsLike">-30°C</span></div>
+                            <div class="stat"><i class="fas fa-wind"></i> Ветер: <span id="windSpeed">7 м/с</span></div>
+                            <div class="stat"><i class="fas fa-tint"></i> Влажность: <span id="humidity">76%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weather-footer">
+                    <p><i class="fas fa-info-circle"></i> Фон сайта меняется под погоду!</p>
+                </div>
+            </section>
+
+            <!-- Наши города -->
+            <section class="cities-section">
+                <h2 class="section-title">
+                    <i class="fas fa-globe-europe"></i>
+                    Наши путешествия
+                </h2>
+                <p class="section-subtitle">Города из нашей Google Таблицы</p>
+                
+                <div class="cities-grid" id="citiesGrid">
+                    <!-- Сюда загрузятся города -->
+                    <div class="loading-city">
+                        <div class="loading-spinner-small"></div>
+                        <p>Загружаем города...</p>
+                    </div>
+                </div>
+                
+                <div class="cities-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-city"></i>
+                        <span>Посещено городов: <strong id="cityCount">0</strong></span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-calendar-star"></i>
+                        <span>Последняя поездка: <strong id="lastTrip">--.--.----</strong></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Цитаты -->
+            <section class="quotes-section">
+                <h2 class="section-title">
+                    <i class="fas fa-comment-heart"></i>
+                    Наши цитаты
+                </h2>
+                <div class="quote-card">
+                    <p class="quote-text" id="quoteText">
+                        Самые тёплые слова хранятся здесь...
+                    </p>
+                    <div class="quote-meta">
+                        <span class="quote-author" id="quoteAuthor">--</span>
+                        <span class="quote-date" id="quoteDate">--.--.----</span>
+                    </div>
+                </div>
+                <div class="quote-actions">
+                    <button id="newQuoteBtn" class="action-btn">
+                        <i class="fas fa-random"></i> Новая цитата
+                    </button>
+                </div>
+            </section>
+
+            <!-- Футер -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <i class="fas fa-heart"></i>
+                        <span>Наша История</span>
+                    </div>
+                    <p class="footer-text">
+                        Данные загружаются из Google Таблиц в реальном времени
+                    </p>
+                    <div class="footer-tech">
+                        <span class="tech-badge">Google Sheets</span>
+                        <span class="tech-badge">OpenWeather</span>
+                        <span class="tech-badge">GitHub Pages</span>
+                    </div>
+                </div>
+                <p class="footer-copyright">
+                    Создано с <i class="fas fa-heart" style="color: #ff3366;"></i> для нашей пары
+                </p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Подключение JavaScript -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Прячем экран загрузки когда всё готово
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
